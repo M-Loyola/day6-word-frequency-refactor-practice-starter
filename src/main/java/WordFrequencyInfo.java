@@ -2,7 +2,7 @@ public class WordFrequencyInfo {
     private final String word;
     private final int count;
 
-    public WordFrequencyInfo(String w, Long i) {
+    public WordFrequencyInfo(String w, int i) {
         this.word = w;
         this.count = i;
     }

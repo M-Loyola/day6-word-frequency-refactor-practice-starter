@@ -27,7 +27,7 @@ public class WordFrequencyGame {
                         Collectors.counting()
                 ));
         return wordFrequencyMap.entrySet().stream()
-                .map(entry -> new WordFrequencyInfo(entry.getKey(), entry.getValue()))
+                .map(entry -> new WordFrequencyInfo(entry.getKey(), Math.toIntExact(entry.getValue())))
                 .sorted(Comparator.comparingLong(WordFrequencyInfo::getWordCount).reversed())
                 .collect(Collectors.toList());
     }
