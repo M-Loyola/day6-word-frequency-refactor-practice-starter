@@ -9,9 +9,6 @@ public class WordFrequencyGame {
 
     public String getResult(String inputStr) {
         String[] words = inputStr.split(SPACE_DELIMITER);
-        if (words.length == 1) {
-            return inputStr + SPACE_CHAR + "1";
-        }
         try {
             List<WordFrequencyInfo> wordFrequencyInfoList = getWorkFrequencyInfoList(words);
             return generatePrintLines(wordFrequencyInfoList);
