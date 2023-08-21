@@ -9,17 +9,14 @@ public class WordFrequencyGame {
     public static final String CALCULATE_ERROR = "Calculate Error";
 
     public String getResult(String inputStr) {
-
         if (inputStr.split(SPACE_DELIMITER).length == 1) {
             return inputStr + " 1";
-        } else {
-            try {
-                //split the input string with 1 to n pieces of spaces
-                List<WordFrequencyInfo> wordFrequencyInfoList = getWordFrequencyInfoList(inputStr);
-                return generatePrintLines(wordFrequencyInfoList);
-            } catch (Exception e) {
-                return CALCULATE_ERROR;
-            }
+        }
+        try {
+            List<WordFrequencyInfo> wordFrequencyInfoList = getWordFrequencyInfoList(inputStr);
+            return generatePrintLines(wordFrequencyInfoList);
+        } catch (Exception e) {
+            return CALCULATE_ERROR;
         }
     }
 
