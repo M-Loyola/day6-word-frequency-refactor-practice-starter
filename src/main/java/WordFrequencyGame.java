@@ -45,12 +45,9 @@ public class WordFrequencyGame {
     }
 
     private static List<WordFrequencyInfo> getWordFrequencyInfo(String[] words) {
-        List<WordFrequencyInfo> wordFrequencyInfoList = new ArrayList<>();
-        for (String word : words) {
-            WordFrequencyInfo wordFrequencyInfo = new WordFrequencyInfo(word, 1);
-            wordFrequencyInfoList.add(wordFrequencyInfo);
-        }
-        return wordFrequencyInfoList;
+        return Arrays.stream(words)
+                .map(word -> new WordFrequencyInfo(word, 1))
+                .collect(Collectors.toList());
     }
 
     private static String generatePrintLines(List<WordFrequencyInfo> wordFrequencyInfoList) {
