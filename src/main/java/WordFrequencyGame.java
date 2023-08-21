@@ -16,7 +16,6 @@ public class WordFrequencyGame {
             try {
                 //split the input string with 1 to n pieces of spaces
                 List<WordFrequencyInfo> wordFrequencyInfoList = getWordFrequencyInfoList(inputStr);
-
                 return generatePrintLines(wordFrequencyInfoList);
             } catch (Exception e) {
                 return CALCULATE_ERROR;
@@ -28,6 +27,10 @@ public class WordFrequencyGame {
         String[] words = inputString.split(SPACE_DELIMITER);
         List<WordFrequencyInfo> wordFrequencyInfoList = getWordFrequencyInfo(words);
         //get the map for the next step of sizing the same word
+        return getWordFrequencyInfoList(wordFrequencyInfoList);
+    }
+
+    private List<WordFrequencyInfo> getWordFrequencyInfoList(List<WordFrequencyInfo> wordFrequencyInfoList) {
         Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(wordFrequencyInfoList);
 
         List<WordFrequencyInfo> frequencyInfosList = new ArrayList<>();
