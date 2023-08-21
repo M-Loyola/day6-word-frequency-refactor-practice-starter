@@ -22,42 +22,22 @@ public class WordFrequencyGame {
 
     private List<WordFrequencyInfo> getWordFrequencyInfoList(String inputString) {
         String[] words = inputString.split(SPACE_DELIMITER);
-        List<WordFrequencyInfo> wordFrequencyInfoList = getWordFrequencyInfo(words);
-        //get the map for the next step of sizing the same word
-        return getWordFrequencyInfoList(wordFrequencyInfoList);
-    }
+        Map<String, List<WordFrequencyInfo>> wordFrequencyMap = new HashMap<>();
 
-    private List<WordFrequencyInfo> getWordFrequencyInfoList(List<WordFrequencyInfo> wordFrequencyInfoList) {
-        Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(wordFrequencyInfoList);
+        for (String word : words) {
+            wordFrequencyMap.computeIfAbsent(word, key -> new ArrayList<>())
+                    .add(new WordFrequencyInfo(word, 1));
+        }
 
-        return getInfoList(wordFrequencyMap);
-    }
-
-    private static List<WordFrequencyInfo> getInfoList(Map<String, List<WordFrequencyInfo>> wordFrequencyMap) {
         return wordFrequencyMap.entrySet().stream()
                 .map(entry -> new WordFrequencyInfo(entry.getKey(), entry.getValue().size()))
                 .sorted((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount())
                 .collect(Collectors.toList());
     }
 
-    private static List<WordFrequencyInfo> getWordFrequencyInfo(String[] words) {
-        return Arrays.stream(words)
-                .map(word -> new WordFrequencyInfo(word, 1))
-                .collect(Collectors.toList());
-    }
-
-    private static String generatePrintLines(List<WordFrequencyInfo> wordFrequencyInfoList) {
+    private String generatePrintLines(List<WordFrequencyInfo> wordFrequencyInfoList) {
         return wordFrequencyInfoList.stream()
                 .map(word -> word.getWord() + SPACE_CHAR + word.getWordCount())
                 .collect(Collectors.joining(NEW_LINE_DELIMITER));
-    }
-
-    private Map<String, List<WordFrequencyInfo>> getListMap(List<WordFrequencyInfo> wordFrequencyInfoList) {
-        Map<String, List<WordFrequencyInfo>> map = new HashMap<>();
-        wordFrequencyInfoList.forEach(wordFrequencyInfo ->
-                map.computeIfAbsent(wordFrequencyInfo.getWord(), key -> new ArrayList<>())
-                        .add(wordFrequencyInfo)
-        );
-        return map;
     }
 }
